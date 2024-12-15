@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: rgb(35, 77, 116);
+    margin-bottom: 50px;
+}
+
+h1 {
+    font-size: xx-large;
+    color: whitesmoke;
+}
+
+nav img {
+    width: 90px;
+    height: 90px;
+    margin-right: 10px;
+    border-radius: 80px;
+}
+
+.container {
+    margin-top: 20px;
+    text-align: center;
+    border: 2px solid #ccc;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, .3);
+}
+
+.form-group {
+    margin-bottom: 10px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-group label {
+    display: inline-block;
+    width: 150px;
+    margin-right: 10px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    padding: 8px;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#signup {
+    background-color: #4081be;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#signup:hover {
+    background-color: #4c7daf;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(35, 77, 116);
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
+h1 {
+    color: white;
+}
+
+#login {
+    background-color: #4081be;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#login:hover {
+    background-color: #4c7daf;
+}
+
+#button {
+    background-color: #4081be;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#button:hover {
+    background-color: #4c7daf;
+}

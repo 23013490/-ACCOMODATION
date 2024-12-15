@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Student Portal</title>
+    <link rel="shortcut icon" href="blob.jpg" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <nav>
+      <img src="blob.jpg" alt="univen logo" />
+      <h1>UNIVEN RESIDENCE ALLOCATION</h1>
+    </nav>
+    <div class="container">
+      <h2>Select your Residence:</h2>
+      <form id="residenceForm">
+        <div class="res">
+          <input type="radio" id="Res1" name="Res" />
+          <label for="Res1">WESTGATE</label>
+        </div>
+        <div class="res">
+          <input type="radio" id="Res2" name="Res" />
+          <label for="Res2">MUTHATHE</label>
+        </div>
+        <div class="res">
+          <input type="radio" id="Res3" name="Res" />
+          <label for="Res3">SIMEKA</label>
+        </div>
+        <div class="res">
+          <input type="radio" id="Res4" name="Res" />
+          <label for="Res4">LOST CITY</label>
+        </div>
+        <div class="res">
+          <input type="radio" id="Res5" name="Res" />
+          <label for="Res5">MONTANA</label>
+        </div>
+        <div class="res">
+          <input type="radio" id="Res6" name="Res" />
+          <label for="Res6">GREEN STONE</label>
+        </div>
+        <div class="res">
+          <input type="radio" id="Res7" name="Res" />
+          <label for="Res7">YELLOW STONE</label>
+        </div>
+        <div class="res">
+          <input type="radio" id="Res8" name="Res" />
+          <label for="Res8">BEVERLY HILLS</label>
+        </div>
+        <div class="res">
+          <input type="radio" id="Res9" name="Res" />
+          <label for="Res9">HILLSIDE</label>
+        </div>
+        <div class="res">
+          <input type="radio" id="Res10" name="Res" />
+          <label for="Res10">MSHELLY</label>
+        </div>
+        <div class="res">
+          <input type="radio" id="Res11" name="Res" />
+          <label for="Res11">LALUCIA</label>
+        </div>
+        <div class="res">
+          <input type="radio" id="Res12" name="Res" />
+          <label for="Res12">SAMVUNI</label>
+        </div>
+        <button type="button" id="button">SUBMIT</button>
+      </form>
+    </div>
+    <footer>
+      <p>Copyright © - 2024 - University of Venda - All rights reserved</p>
+    </footer>
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+      import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+      import {
+        getFirestore,
+        collection,
+        addDoc,
+      } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyD3rmjxoSArt15edKBd4hupFGmWO75n47E",
+        authDomain: "another-543c5.firebaseapp.com",
+        projectId: "another-543c5",
+        storageBucket: "another-543c5.appspot.com",
+        messagingSenderId: "662385041534",
+        appId: "1:662385041534:web:33278c493c7172feb1782f",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+
+      console.log(db); // Check if db is properly initialized
+
+      // Function to handle form submission
+      document
+        .getElementById("button")
+        .addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent default button behavior
+          myCheck();
+        });
+
+      // Function to handle residence selection
+      function myCheck() {
+        var radios = document.getElementsByName("Res");
+
+        for (var i = 0; i < radios.length; i++) {
+          if (radios[i].checked) {
+            const residenceName = radios[i].nextElementSibling.textContent;
+            const user = auth.currentUser;
+            if (user) {
+              const uid = user.uid;
+              addResidence(residenceName, uid);
+              alert("Submited,wait for response");
+            } else {
+              console.error("User is not authenticated");
+            }
+            return;
+          }
+        }
+        alert("Select residence");
+      }
+
+      // Function to add residence to Firestore
+      async function addResidence(name, uid) {
+        try {
+          const docRef = await addDoc(collection(db, "residences"), {
+            name: name,
+            status: "unallocated",
+            uid: uid,
+          });
+          console.log("Residence added successfully with ID: ", docRef.id);
+        } catch (e) {
+          console.error("Error adding residence: ", e);
+        }
+      }
+    </script>
+  </body>
+</html>

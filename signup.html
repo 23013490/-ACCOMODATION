@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UNIVEN RESIDENCE ALLOCATION</title>
+    <link rel="shortcut icon" href="blob.jpg" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <nav>
+      <img src="blob.jpg" alt="univen logo" />
+      <h1>UNIVEN RESIDENCE ALLOCATION</h1>
+    </nav>
+    <div class="container">
+      <h2>SIGN UP</h2>
+      <div class="form-group">
+        <label for="student-staffNo">Student no:</label>
+        <input type="text" id="studentNo" name="studentStaffNo" />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" />
+        <label for="password">Repeat password:</label>
+        <input type="password" id="Rpassword" name="Rpassword" />
+      </div>
+      <button id="signup">SIGN UP</button>
+    </div>
+    <footer>
+      <p>Copyright © - 2024 - University of Venda - All rights reserved</p>
+    </footer>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+      import {
+        getAuth,
+        createUserWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyD3rmjxoSArt15edKBd4hupFGmWO75n47E",
+        authDomain: "another-543c5.firebaseapp.com",
+        projectId: "another-543c5",
+        storageBucket: "another-543c5.appspot.com",
+        messagingSenderId: "662385041534",
+        appId: "1:662385041534:web:33278c493c7172feb1782f",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      // Function to handle sign up
+      function signUp() {
+        let studentNo = document.getElementById("studentNo").value;
+        let email = studentNo + "@mvula.univen.ac.za";
+        let password = document.getElementById("password").value;
+        let Rpassword = document.getElementById("Rpassword").value;
+
+        if (studentNo === "" || password === "" || Rpassword === "") {
+          alert("Please fill in all fields");
+          return;
+        }
+
+        if (password !== Rpassword) {
+          alert("Passwords do not match");
+          return;
+        }
+
+        createUserWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            // User created successfully
+            const user = userCredential.user;
+            console.log("User created:", user.email);
+            window.location.href = "login.html"; // Redirect after successful signup
+          })
+          .catch((error) => {
+            // Handle user creation errors
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error("User creation error:", errorMessage);
+            // Display error message to the user
+            alert(errorMessage);
+          });
+      }
+
+      // Event listener for sign up button
+      document.getElementById("signup").addEventListener("click", signUp);
+    </script>
+  </body>
+</html>
